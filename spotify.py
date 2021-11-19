@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import scale
-from sklearn.metrics import plot_confusion_matrix
+from sklearn import metrics
 
 # dataload
 data_2010s = pd.read_csv('dataset/dataset-of-10s.csv')
@@ -186,15 +186,15 @@ gsclass = GaussianNB()
 
 cv = KFold(5, shuffle=True, random_state=42)
 classifiers = [dectree, svc, randfclass, adaclass, mlpclass, gsclass]
+classifiers_name = ['DecisionTreeClassifier', 'SVC', 'RandomForestClassifier', 'AdaBoostClassifier', 'MLPClassifier', 'GaussianNB']
 
 # A function for testing classifiers result table (sorted by f1 score)
 def model_check(X, y, classifiers, cv):    
     model_table = pd.DataFrame()
-    row_index = 0
+    idx = 0
     for cls in classifiers:
-        
-        ML_name = ['DecisionTreeClassifier', 'SVC', 'RandomForestClassifier', 'AdaBoostClassifier', 'MLPClassifier', 'GaussianNB']
-        model_table.loc[row_index, 'Model Name'] = ML_name[row_index]
+    
+        model_table.loc[idx, 'Model Name'] = classifiers_name[idx]
         
         cv_results = cross_validate(
             cls,
@@ -205,18 +205,18 @@ def model_check(X, y, classifiers, cv):
             return_train_score=True,
             n_jobs=-1
         )
-        model_table.loc[row_index, 'Train Roc/AUC Mean'] = cv_results['train_roc_auc'].mean()
-        model_table.loc[row_index, 'Test Roc/AUC Mean'] = cv_results['test_roc_auc'].mean()
-        model_table.loc[row_index, 'Test Roc/AUC Std'] = cv_results['test_roc_auc'].std()
-        model_table.loc[row_index, 'Train Accuracy Mean'] = cv_results['train_accuracy'].mean()
-        model_table.loc[row_index, 'Test Accuracy Mean'] = cv_results['test_accuracy'].mean()
-        model_table.loc[row_index, 'Test Acc Std'] = cv_results['test_accuracy'].std()
-        model_table.loc[row_index, 'Train F1 Mean'] = cv_results['train_f1'].mean()
-        model_table.loc[row_index, 'Test F1 Mean'] = cv_results['test_f1'].mean()
-        model_table.loc[row_index, 'Test F1 Std'] = cv_results['test_f1'].std()
-        model_table.loc[row_index, 'Time'] = cv_results['fit_time'].mean()
+        model_table.loc[idx, 'Train Roc/AUC Mean'] = cv_results['train_roc_auc'].mean()
+        model_table.loc[idx, 'Test Roc/AUC Mean'] = cv_results['test_roc_auc'].mean()
+        model_table.loc[idx, 'Test Roc/AUC Std'] = cv_results['test_roc_auc'].std()
+        model_table.loc[idx, 'Train Accuracy Mean'] = cv_results['train_accuracy'].mean()
+        model_table.loc[idx, 'Test Accuracy Mean'] = cv_results['test_accuracy'].mean()
+        model_table.loc[idx, 'Test Acc Std'] = cv_results['test_accuracy'].std()
+        model_table.loc[idx, 'Train F1 Mean'] = cv_results['train_f1'].mean()
+        model_table.loc[idx, 'Test F1 Mean'] = cv_results['test_f1'].mean()
+        model_table.loc[idx, 'Test F1 Std'] = cv_results['test_f1'].std()
+        model_table.loc[idx, 'Time'] = cv_results['fit_time'].mean()
 
-        row_index += 1        
+        idx += 1        
 
     model_table.sort_values(by=['Test F1 Mean'],
                             ascending=False,
