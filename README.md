@@ -13,6 +13,8 @@
     * [Testing algorithm](#testing-algorithm)
     * [Learning Curve](#learning-curve)
     * [Confusion Matrix](#confusion-matrix)
+- [Conclusion](#conclusion)
+    * [Retrospect](#retrospect)
 
 # Introduction
 
@@ -30,6 +32,7 @@ kaggle data blah blah
 - 총 21개의 컬럼 (18개 numerical data, 3개 categorical data)
 
 | Index | Attribute | Description |
+|--- | --- | --- |
 | 1 | track | blah |
 | 2 | artist | blah |
 | 3 | uri | blah |
@@ -53,12 +56,27 @@ kaggle data blah blah
 | 21 | duration_s | blah |
 
 # Exploratory Data Analysis 
-
+blah blah
 ### Numerical Data
+![](image/image1.png)
+![](image/image2.png)
+![](image/image3.png)
+![](image/scatter1.png)
+![](image/scatter2.png)
+![](image/scatter3.png)
+![](image/scatter4.png)
+![](image/scatter5.png)
 ### Categorical Data
+![](image/image4.png)
 
 # Machine Learning Modeling
 
 ### Testing algorithm
 ### Learning Curve
+![](image/image5.png)
 ### Confusion Matrix
+![](image/image6.png)
+
+# Conclusion
+
+### Retrospect 
