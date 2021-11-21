@@ -13,6 +13,7 @@
     * [Feature Importances](#feature-importances)
     * [Learning Curve](#learning-curve)
     * [Confusion Matrix](#confusion-matrix)
+    * [Conclusion](#conclusion)
 - [Retrospect](#retrospect)
 
 # Introduction
@@ -35,29 +36,29 @@
 - 연도 구분을 위해 'year' 과 단위를 'ms' 에서 's'로 변경하기 위해 'duration_s' 컬럼 추가
 - 총 21개의 컬럼 (18개 numerical data, 3개 categorical data)
 
-| Index | Attribute | Description |
-|--- | --- | --- |
-| 1 | track | blah |
-| 2 | artist | blah |
-| 3 | uri | blah |
-| 4 | danceability | blah 
-| 5 | energy | blah |
-| 6 | key | blah |
-| 7 | loudness | blah |
-| 8 | mode | blah |
-| 9 | speechiness | blah |
-| 10 | acousticness | blah |
-| 11 | instrumentalness | blah |
-| 12 | liveness | blah |
-| 13 | valence | blah |
-| 14 | tempo | blah |
-| 15 | duration_ms | blah |
-| 16 | time_signature | blah |
-| 17 | chorus_hit | blah |
-| 18 | sections | blah |
-| 19 | target | blah |
-| 20 | year | blah |
-| 21 | duration_s | blah |
+| Index | Attribute | 
+|--- | --- | 
+| 1 | track | 
+| 2 | artist | 
+| 3 | uri |
+| 4 | danceability |
+| 5 | energy |
+| 6 | key |
+| 7 | loudness | 
+| 8 | mode |
+| 9 | speechiness |
+| 10 | acousticness |
+| 11 | instrumentalness |
+| 12 | liveness |
+| 13 | valence |
+| 14 | tempo |
+| 15 | duration_ms |
+| 16 | time_signature |
+| 17 | chorus_hit |
+| 18 | sections |
+| 19 | target |
+| 20 | year |
+| 21 | duration_s |
 
 
 # Exploratory Data Analysis 
@@ -78,8 +79,9 @@
 
 #### danceability vs valence
 ![](image/scatter1.png)
-#### energy vs acousticness, loudness
+#### energy vs acousticness
 ![](image/scatter2.png)
+#### energy vs loudness
 ![](image/scatter3.png)
 #### loudness vs acousticness
 ![](image/scatter4.png)
@@ -112,15 +114,19 @@ EDA를 통해서 데이터 파악하고 hits 할지 예측하기 위해 머신�
 
 ### Learning Curve
 
-- MLP 외에 전부  Overfitting 현상이 나타나고 있다. 
-
 ![](image/image5.png)
 
 ### Confusion Matrix
 
 ![](image/image6.png)
 
+### Conclusion
+
+-  Random Forest 모델이 가장 좋은 성능을 가진 것으로 나왔으나, 과적합으로 보인다.
+-  score, learning curve, confusion matrix 를 통해서 보았을때, MLP 가 가장 노멀한 모델로 판단된다.
+
 # Retrospect 
 
 - 전체적인 특성을 조금 더 들여다 보는 EDA가 필요하다. hits or flop 초점을 맞춘 EDA가 주로 진행되었다고 생각한다. 
 - 다른 방식으로 outlier 제거하는 방법을 강구해서 모델 강화를 해야한다.
+- Neural Network 모델을 가장 노멀한 모델로 판단하였기 때문에 딥러닝으로 모델링을 해봐도 좋을 것 같다.
