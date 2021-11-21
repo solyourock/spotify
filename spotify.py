@@ -37,17 +37,17 @@ data_1980s["year"] = 1980
 df_list = [data_2010s, data_2000s, data_1990s, data_1980s]
 data = pd.concat(df_list)
 
-# revise and add column for song's duration 
+# revise and add column for song's duration
 data["duration_s"] = data["duration_ms"]/1000
 
 # devide hits and flot data in case
 hits = data[data["target"] == 1]
 flop = data[data["target"] == 0]
 
-# overall describe varibles 
+# overall describe varibles
 data_description = data.describe()
 
-# numerical data 
+# numerical data
 # variables
 var_list = ['danceability', 'energy', 'key', 'loudness',
        'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness',
@@ -68,10 +68,10 @@ for i in range(2):
 plt.show();
 # plt.savefig('image1.png', facecolor='white')
 
-# features distribution boxplot 
+# features distribution boxplot
 # plt.style.use('ggplot')
 fig, axes = plt.subplots(2, 7, figsize = (20, 20))
-fig.suptitle('features distribution', fontsize = 30)
+fig.suptitle('features distribution', fontsize = 40)
 
 column_idx = 0
 for i in range(2):
@@ -94,7 +94,7 @@ plt.title('features correlation', fontsize=40)
 plt.show();
 # plt.savefig('image3.png', facecolor='white')
 
-# variable's correaltion over 0.5 
+# variable's correaltion over 0.5
 def var_scatter(x, y, num):
     plt.figure(figsize=(20, 15))
     sns.scatterplot(x=x, y=y, hue=data['target'])
@@ -139,32 +139,32 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # classifiers
 # Desicion tree classifier
-""" 
-Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. 
-The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. 
-Decision trees learn from data to approximate a sine curve with a set of if-then-else decision rules. 
-The deeper the tree, the more complex the decision rules and the fitter the model. 
+"""
+Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression.
+The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
+Decision trees learn from data to approximate a sine curve with a set of if-then-else decision rules.
+The deeper the tree, the more complex the decision rules and the fitter the model.
 """
 # Support Vector Machines
-""" 
+"""
 Support vector machines (SVMs) are a set of supervised learning methods used for classification, regression and outliers detection.
 The advantages of support vector machines are:
 1. Effective in high dimensional spaces.
 2. Still effective in cases where number of dimensions is greater than the number of samples.
 3. Uses a subset of training points in the decision function (called support vectors), so it is also memory efficient.
-4. Versatile: different Kernel functions can be specified for the decision function. 
+4. Versatile: different Kernel functions can be specified for the decision function.
    Common kernels are provided, but it is also possible to specify custom kernels.
-""" 
+"""
 # Random forest classifier
 """
-The sklearn.ensemble module includes two averaging algorithms based on randomized decision trees: the RandomForest algorithm and the Extra-Trees method. 
-Both algorithms are perturb-and-combine technique specifically designed for trees. 
-This means a diverse set of classifiers is created by introducing randomness in the classifier construction. 
+The sklearn.ensemble module includes two averaging algorithms based on randomized decision trees: the RandomForest algorithm and the Extra-Trees method.
+Both algorithms are perturb-and-combine technique specifically designed for trees.
+This means a diverse set of classifiers is created by introducing randomness in the classifier construction.
 The prediction of the ensemble is given as the averaged prediction of the individual classifiers.
 """
 # Ada boost classifier
 """
-An AdaBoost classifier is a meta-estimator that begins by fitting a classifier on the original dataset and then fits additional copies of the classifier on the same dataset 
+An AdaBoost classifier is a meta-estimator that begins by fitting a classifier on the original dataset and then fits additional copies of the classifier on the same dataset
 but where the weights of incorrectly classified instances are adjusted such that subsequent classifiers focus more on difficult cases.
 """
 # MLP Classifier
@@ -188,14 +188,17 @@ cv = KFold(5, shuffle=True, random_state=42)
 classifiers = [dectree, svc, randfclass, adaclass, mlpclass, gsclass]
 classifiers_name = ['DecisionTreeClassifier', 'SVC', 'RandomForestClassifier', 'AdaBoostClassifier', 'MLPClassifier', 'GaussianNB']
 
+classifiers_re = [dectree, randfclass, adaclass]
+classifiers_name_re = ['DecisionTreeClassifier', 'RandomForestClassifier', 'AdaBoostClassifier']
+
 # A function for testing classifiers result table (sorted by f1 score)
-def model_check(X, y, classifiers, cv):    
+def model_check(X, y, classifiers, cv):
     model_table = pd.DataFrame()
     idx = 0
     for cls in classifiers:
-    
+
         model_table.loc[idx, 'Model Name'] = classifiers_name[idx]
-        
+
         cv_results = cross_validate(
             cls,
             X,
@@ -216,7 +219,7 @@ def model_check(X, y, classifiers, cv):
         model_table.loc[idx, 'Test F1 Std'] = cv_results['test_f1'].std()
         model_table.loc[idx, 'Time'] = cv_results['fit_time'].mean()
 
-        idx += 1        
+        idx += 1
 
     model_table.sort_values(by=['Test F1 Mean'],
                             ascending=False,
@@ -235,7 +238,7 @@ def plot_learning_curve(classifiers,
 
     fig, axes = plt.subplots(3, 2, figsize=(20, 25))
     axes = axes.flatten()
-    
+
     for ax, classifier in zip(axes, classifiers):
 
         ax.set_title(f'{classifier.__class__.__name__} Learning Curve')
@@ -274,11 +277,12 @@ def plot_learning_curve(classifiers,
                 label='Cross-validation score')
         ax.legend(loc='best')
     plt.show()
+    # plt.savefig('image5.png', facecolor='white')
 
 # A function for confusion matrix
-def plot_confusion_matrix(classifiers):   
-    fig, axes = plt.subplots(3, 2, figsize = (20, 15), constrained_layout=True)  
-    fig.suptitle('Confusion Matrix', fontsize = 30)
+def plot_confusion_matrix(classifiers):
+    fig, axes = plt.subplots(3, 2, figsize = (20, 15), constrained_layout=True)
+    fig.suptitle('Confusion Matrix', fontsize = 40)
 
     idx = 0
     for i in range(3):
@@ -291,6 +295,24 @@ def plot_confusion_matrix(classifiers):
         axes[i][j].set_ylabel('Actual label')
         axes[i][j].set_xlabel('Predicted label')
         idx += 1
+    plt.show();
+#     plt.savefig('image6.png', facecolor='white')
+
+# A function for feature importance
+def feature_importance(classifier):
+    fig, axes = plt.subplots(3, 1, figsize=(20,15), constrained_layout=True)
+    fig.suptitle("Feature Importances", fontsize=30)
+    for ax, classifier in zip(axes, classifiers_re):
+        feature_imp = classifier.feature_importances_
+        importances = pd.DataFrame()
+        importances['variables'] = X.columns
+        importances['feature'] = feature_imp
+        importances = importances.sort_values(by=['feature'], ascending=False)
+
+        sns.barplot(x='variables', y='feature', data=importances, palette="vlag", ax=ax)
+        ax.set_title(f'{classifier.__class__.__name__}')
+    plt.show();
+#     plt.savefig('image7.png', facecolor='white')
 
 # ML algorithms testing results
 model_check(X, y, classifiers, cv)
@@ -306,3 +328,6 @@ plot_learning_curve(classifiers,
 
 # ML algoritms confusion matrix
 plot_confusion_matrix(classifiers)
+
+# ML algoritms feature importance
+feature_importance(classifiers_re)
