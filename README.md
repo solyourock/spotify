@@ -13,7 +13,7 @@
     * [Feature Importances](#feature-importances)
     * [Learning Curve](#learning-curve)
     * [Confusion Matrix](#confusion-matrix)
-    * [Conclusion](#conclusion)
+- [Conclusion](#conclusion)
 - [Retrospect](#retrospect)
 
 # Introduction
@@ -120,7 +120,7 @@ EDA를 통해서 데이터 파악하고 hits 할지 예측하기 위해 머신�
 
 ![](image/image6.png)
 
-### Conclusion
+# Conclusion
 
 -  Random Forest 모델이 가장 좋은 성능을 가진 것으로 나왔으나, 과적합으로 보인다.
 -  score, learning curve, confusion matrix 를 통해서 보았을때, MLP 가 가장 노멀한 모델로 판단된다.
