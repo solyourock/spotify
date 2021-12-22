@@ -68,8 +68,8 @@
 ### Numerical Data
 
 - hits와 flop은 danceability, energy, loudness, acousticness, instrumentalness, valence 컬럼에서 다른 양상을 나타내고 있다. 
-- 그 중 acousticness, instrumentalness 은 hits의 경우 어떤 공통적인 특성이 크다기 보다는 제각각 다른 분포를 가고 있다.
-- danceability, loudness, instrumentalness 이 hits할지 flop할지 가장 영향을 크게 미치고 있다.
+- 그 중 acousticness, instrumentalness 은 hits의 경우 어떤 공통적인 특성이 크다기 보다는 제각각 다른 분포를 가지고 있다.
+- danceability, loudness, instrumentalness 이 hits할지 flop할지에 가장 영향을 크게 미치고 있다.
 
 ![](image/image1.png)
 ![](image/image2.png)
@@ -101,7 +101,7 @@ EDA를 통해서 데이터 파악하고 hits 할지 예측하기 위해 머신�
 ### Testing algorithm
 
 - 총 6가지 모델 (Desicion tree classifier, Support Vector Machines, Random forest classifier, Ada boost classifier, MLP Classifier, GaussianNB) 을 사용하였다. 
-- 앙상블 모델인 Random Forest와 Decision Tree가 Train 에서는 좋은 성능을 보였지만 Test 에서는 그렇지 못하여서 과적합으로 판단하엿다. 
+- Random Forest와 Decision Tree가 Train 에서는 좋은 성능을 보였지만 Test 에서는 그렇지 못하여서 과적합으로 판단하엿다. 
 
 ![](image/image8.png)
 
